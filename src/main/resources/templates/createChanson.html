@@ -1,0 +1,75 @@
+<! -- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>Formulaire Chanson</title>
+</head>
+<body>
+<div th:replace="template"></div>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header" th:if="${mode == 'new'}">Ajout des Chansons</div>
+        <div class="card-header" th:if="${mode == 'edit'}">Modification des Chansons</div>
+        <div class="card-body">
+			<form th:action="@{/saveChanson}" method="post">
+			    <div class="form-group">
+			        <label class="control-label">Titre Chanson :</label>
+			        <input type="text" name="titreChanson" class="form-control" th:value="${chanson.titreChanson}" />
+			        <span th:errors="${#fields.hasErrors('titreChanson')}" class="text-danger"> </span>
+			    </div>
+			    <div class="form-group">
+			        <label class="control-label">Type Chanson :</label>
+			        <input type="text" name="type" class="form-control" th:value="${chanson.type}" />
+			        <span th:errors="${#fields.hasErrors('type')}" class="text-danger"> </span>
+			    </div>
+			    <div class="form-group">
+			        <label class="control-label">Date Sortie :</label>
+			        <input type="date" name="dateSortie" class="form-control" th:value="${#dates.format(chanson.dateSortie, 'yyyy-MM-dd')}" />
+			        <span th:errors="${#fields.hasErrors('dateSortie')}" class="text-danger"> </span>
+			    </div>
+			    <div class="form-group">
+			        <label class="control-label">Catégorie :</label>
+			        <select name="categorie.id" class="form-control">
+			            <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.nom}"></option>
+			        </select>
+			    </div>
+			    <div>
+			        <button type="submit" class="btn btn-primary">Ajouter</button>
+			    </div>
+			</form>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Titre Chanson :</label>
+                    <input type="text" name="titreChanson" class="form-control" th:value="${chanson.titreChanson}" />
+                    <span th:errors="${chanson.titreChanson}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Type :</label>
+                    <input type="text" name="type" class="form-control" th:value="${chanson.type}" />
+                    <span th:errors="${chanson.type}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Date Sortie :</label>
+                    <input type="date" name="dateSortie" class="form-control" th:value="${chanson.dateSortie}" />
+                    <span th:errors="${chanson.dateSortie}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Catégorie :</label>
+                    <select name="categorie" class="form-control" th:field="*{categorie.id}">
+                        <option th:each="cat : ${categories}" th:value="${cat.idCat}" th:text="${cat.nomCategorie}"></option>
+                    </select>
+                    <span th:errors="${chanson.categorie}" class="text-danger"></span>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+-->

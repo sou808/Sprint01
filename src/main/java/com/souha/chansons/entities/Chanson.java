@@ -1,16 +1,14 @@
-package com.souha.chansons.entities;
+ package com.souha.chansons.entities;
 
 import java.util.Date;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Chanson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codeChanson;
+    private Long idChanson;
+
     private String titreChanson;
     private String type;
     private Date dateSortie;
@@ -20,18 +18,17 @@ public class Chanson {
     }
 
     public Chanson(String titreChanson, String type, Date dateSortie) {
-        super();
         this.titreChanson = titreChanson;
         this.type = type;
         this.dateSortie = dateSortie;
     }
 
-    public Long getCodeChanson() {
-        return codeChanson;
+    public Long getIdChanson() {
+        return idChanson;
     }
 
-    public void setCodeChanson(Long codeChanson) {
-        this.codeChanson = codeChanson;
+    public void setIdChanson(Long idChanson) {
+        this.idChanson = idChanson;
     }
 
     public String getTitreChanson() {
@@ -57,10 +54,18 @@ public class Chanson {
     public void setDateSortie(Date dateSortie) {
         this.dateSortie = dateSortie;
     }
+    @ManyToOne
+    private Categorie categorie;
+    public Categorie getCategorie() {
+    	return categorie;
+    	}
+    	public void setCategorie(Categorie categorie) {
+    	this.categorie = categorie;
+    	}
 
     @Override
     public String toString() {
-        return "Chanson [codeChanson=" + codeChanson + ", titreChanson=" + titreChanson + ", type=" + type
-                + ", dateSortie=" + dateSortie + "]";
-    }
+        return "Chanson [idChanson=" + idChanson + ", titreChanson=" + titreChanson +
+               ", type=" + type + ", dateSortie=" + dateSortie + "]";
+    }  
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template}">
+<head>
+    <meta charset="utf-8">
+    <title>Liste des Chansons</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">Liste des Chansons</div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th>ID</th>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr th:each="c : ${chansons.content}">
+                        <td th:text="${c.idChanson}"></td>
+                        <td th:text="${c.titreChanson}"></td>
+                        <td th:text="${c.auteurChanson}"></td>
+                        <td th:text="${#dates.format(c.dateCreation, 'dd/MM/yyyy')}"></td>
+                        <td>
+                            <a class="btn btn-danger"
+                               th:href="@{/supprimerChanson(id=${c.idChanson}, page=${currentPage}, size=${size})}"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chanson ?');">
+                                Supprimer
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Affichage du total d'éléments et de pages -->
+                <p>Total des éléments : <span th:text="${totalElements}"></span></p>
+                <p>Total des pages : <span th:text="${totalPages}"></span></p>
+
+                <!-- Pagination -->
+                <ul class="nav nav-pills">
+                    <li th:each="page, status : ${pages}">
+                        <a th:class="${status.index == currentPage ? 'btn btn-primary' : 'btn'}"
+                           th:href="@{/ListeChansons(page=${status.index}, size=${size})}"
+                           th:text="${status.index + 1}"></a> <!-- Ajouter 1 pour un affichage plus naturel -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
